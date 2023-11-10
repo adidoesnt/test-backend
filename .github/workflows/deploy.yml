@@ -52,6 +52,8 @@ jobs:
 
             - name: Deploy to Heroku
               run: |
+                  git config --global user.email "actions@github.com"
+                  git config --global user.name "GitHub Actions"
                   git add --all
                   git commit -m 'build static pages'
                   git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git HEAD:refs/heads/main
