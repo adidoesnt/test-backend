@@ -6,7 +6,7 @@ import Button from "@/components/button";
 const { NEXT_PUBLIC_BACKEND_URL } = process.env;
 
 export default function Home() {
-    const uri = `${NEXT_PUBLIC_BACKEND_URL}/green/health`;
+    const uri = `${NEXT_PUBLIC_BACKEND_URL}/health`;
     return (
         <main className={styles.main}>
             <Link href={getRoute("/")} className={styles.button}>
