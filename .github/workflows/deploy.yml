@@ -37,6 +37,7 @@ jobs:
                   (cd frontend && yarn && yarn build && cp -R dist ../ && git add --all && git commit -m 'build static pages' && git push ${{ github.ref }})
 
     deploy:
+        needs: build
         runs-on: ubuntu-latest
 
         env:
