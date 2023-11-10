@@ -34,7 +34,15 @@ jobs:
 
             - name: Build frontend
               run: |
-                  (cd frontend && yarn && yarn build && cp -R dist ../ && git add --all && git commit -m 'build static pages' && git push ${{ github.ref }})
+                  cd frontend
+                  yarn
+                  yarn build
+                  cp -R dist ../
+                  git config --global user.email "actions@github.com"
+                  git config --global user.name "GitHub Actions"
+                  git add --all
+                  git commit -m 'build static pages'
+                  git push ${{ github.ref }}
 
     deploy:
         needs: build
