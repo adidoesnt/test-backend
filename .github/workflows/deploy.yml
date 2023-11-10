@@ -30,14 +30,6 @@ jobs:
           uses: actions/setup-node@v2
           with:
             node-version: '18'
-
-        - name: Install yarn
-          run: |
-            npm install -g yarn
-
-        - name: Build frontend
-          run: |
-            (cd frontend && yarn && yarn build && cp -R dist ../) && ls dist
         
         - name: Install Heroku CLI
           run: |
