@@ -32,7 +32,7 @@ jobs:
 
         - name: Build frontend
           run: |
-            (cd ../../frontend && yarn ci && yarn build && cp -R dist ../)
+            ls && (cd ../../frontend && yarn ci && yarn build && cp -R dist ../)
         
         - name: Install Heroku CLI
           run: |
