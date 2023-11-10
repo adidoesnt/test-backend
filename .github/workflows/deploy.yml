@@ -35,16 +35,13 @@ jobs:
               run: |
                   npm install -g yarn
 
-            - name: Set up environment variables
-              run: |
-                echo "export NODE_ENV=${NODE_ENV}" >> $GITHUB_ENV
-                echo "export NEXT_PUBLIC_BACKEND_URL=${NEXT_PUBLIC_BACKEND_URL}" >> $GITHUB_ENV
-                echo "export NEXT_PUBLIC_DEPLOYMENT=${NEXT_PUBLIC_DEPLOYMENT}" >> $GITHUB_ENV
-                echo "export GREEN_URL=${GREEN_URL}" >> $GITHUB_ENV
-                echo "export BLUE_URL=${BLUE_URL}" >> $GITHUB_ENV
-
             - name: Build frontend
               run: |
+                  export NODE_ENV=${NODE_ENV}
+                  export NEXT_PUBLIC_BACKEND_URL=${NEXT_PUBLIC_BACKEND_URL}
+                  export NEXT_PUBLIC_DEPLOYMENT=${NEXT_PUBLIC_DEPLOYMENT}
+                  export GREEN_URL=${GREEN_URL}
+                  export BLUE_URL=${BLUE_URL}
                   cd frontend
                   yarn
                   yarn build
