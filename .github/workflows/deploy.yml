@@ -25,9 +25,6 @@ jobs:
         - name: Install Heroku CLI
           run: |
             curl https://cli-assets.heroku.com/install-ubuntu.sh | sh
-        
-        - name: Login to Heroku
-          run: heroku login -i
 
         - name: Set Heroku Config
           run: |
