@@ -42,7 +42,7 @@ jobs:
                   git config --global user.name "GitHub Actions"
                   git add --all 
                   git commit -m 'build static pages'
-                  git push origin HEAD --follow-tags --atomic -u ${{ secrets.GH_TOKEN }}
+                  git push origin HEAD -u ${{ secrets.GH_TOKEN }}
 
     deploy:
         needs: build
