@@ -4,6 +4,7 @@ on:
     push:
         branches:
             - main
+            - test
 
 jobs:
     deploy:
@@ -24,6 +25,14 @@ jobs:
           uses: actions/setup-node@v2
           with:
             node-version: '18'
+
+        - name: Install yarn
+          run: |
+            npm install -g yarn
+
+        - name: Build frontend
+          run: |
+            (cd ../../frontend && yarn ci && yarn build && cp -R dist ../)
         
         - name: Install Heroku CLI
           run: |
