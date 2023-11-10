@@ -9,6 +9,10 @@ jobs:
     deploy:
         runs-on: ubuntu-latest
 
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+          HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
+
         steps:
         - name: Checkout Repository
           uses: actions/checkout@v2
@@ -24,6 +28,10 @@ jobs:
         
         - name: Login to Heroku
           run: heroku login -i
+
+        - name: Set Heroku Config
+          run: |
+            heroku config:set FRONTEND_URL=$FRONTEND_URL -a $HEROKU_APP_NAME
 
         - name: Deploy to Heroku
           run: |
