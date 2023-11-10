@@ -37,11 +37,6 @@ jobs:
 
             - name: Build frontend
               run: |
-                  export NODE_ENV=${NODE_ENV}
-                  export NEXT_PUBLIC_BACKEND_URL=${NEXT_PUBLIC_BACKEND_URL}
-                  export NEXT_PUBLIC_DEPLOYMENT=${NEXT_PUBLIC_DEPLOYMENT}
-                  export GREEN_URL=${GREEN_URL}
-                  export BLUE_URL=${BLUE_URL}
                   cd frontend
                   yarn
                   yarn build
