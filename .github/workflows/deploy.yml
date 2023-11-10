@@ -7,38 +7,57 @@ on:
             - test
 
 jobs:
+    build:
+        runs-on: ubuntu-latest
+
+        env:
+            NODE_ENV: ${{ secrets.FRONTEND_URL }}
+            NEXT_PUBLIC_BACKEND_URL: ${{ secrets.NEXT_PUBLIC_BACKEND_URL }}
+            NEXT_PUBLIC_DEPLOYMENT: ${{ secrets.NEXT_PUBLIC_DEPLOYMENT }}
+            GREEN_URL: ${{ secrets.GREEN_URL }}
+            BLUE_URL: ${{ secrets.BLUE_URL }}
+
+        steps:
+            - name: Checkout Repository
+              uses: actions/checkout@v2
+              with:
+                  fetch-depth: 0
+
+            - name: Set up Node.js
+              uses: actions/setup-node@v2
+              with:
+                  node-version: "18"
+
+            - name: Install yarn
+              run: |
+                  npm install -g yarn
+
+            - name: Build frontend
+              run: |
+                  (cd frontend && yarn && yarn build && cp -R dist ../ && git add --all && git commit -m 'build static pages' && git push ${{ github.ref }})
+
     deploy:
         runs-on: ubuntu-latest
 
         env:
-          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-          HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
-          FRONTEND_URL: ${{ secrets.FRONTEND_URL }}
-          NODE_ENV: ${{ secrets.FRONTEND_URL }}
-          NEXT_PUBLIC_BACKEND_URL: ${{ secrets.NEXT_PUBLIC_BACKEND_URL }}
-          NEXT_PUBLIC_DEPLOYMENT: ${{ secrets.NEXT_PUBLIC_DEPLOYMENT }}
-          GREEN_URL: ${{ secrets.GREEN_URL }}
-          BLUE_URL: ${{ secrets.BLUE_URL }}
+            HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+            HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
+            FRONTEND_URL: ${{ secrets.FRONTEND_URL }}
 
         steps:
-        - name: Checkout Repository
-          uses: actions/checkout@v2
-          with:
-            fetch-depth: 0
+            - name: Checkout Repository
+              uses: actions/checkout@v2
+              with:
+                  fetch-depth: 0
 
-        - name: Set up Node.js
-          uses: actions/setup-node@v2
-          with:
-            node-version: '18'
-        
-        - name: Install Heroku CLI
-          run: |
-            curl https://cli-assets.heroku.com/install-ubuntu.sh | sh
+            - name: Install Heroku CLI
+              run: |
+                  curl https://cli-assets.heroku.com/install-ubuntu.sh | sh
 
-        - name: Set Heroku Config
-          run: |
-            heroku config:set FRONTEND_URL=$FRONTEND_URL -a $HEROKU_APP_NAME
+            - name: Set Heroku Config
+              run: |
+                  heroku config:set FRONTEND_URL=$FRONTEND_URL -a $HEROKU_APP_NAME
 
-        - name: Deploy to Heroku
-          run: |
-            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git HEAD:refs/heads/main
+            - name: Deploy to Heroku
+              run: |
+                  git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git HEAD:refs/heads/main

@@ -9,9 +9,7 @@
   },
   "scripts": {
     "dev": "nodemon src/index.js",
-    "start": "node src/index.js",
-    "build": "(cd frontend && yarn && yarn build && cp -R dist ../)",
-    "start:prod": "yarn build && yarn start"
+    "start": "node src/index.js"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"
