@@ -1,14 +1,14 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "src/index.js",
   "license": "MIT",
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.18.2"
   },
   "scripts": {
-    "dev": "nodemon src/index.js",
+    "dev": "source .envrc && nodemon src/index.js",
     "start": "node src/index.js",
     "build": "cd frontend && yarn && yarn build && cp -R dist ../",
     "serve": "serve dist"
