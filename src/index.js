@@ -1,18 +1,18 @@
 const express = require("express");
 const cors = require("cors");
-const path = require('path');
+const path = require("path");
 
-const { PORT, FRONTEND_URL } = process.env;
+const { PORT, FRONTEND_URL, REVERSE_PROXY_URL } = process.env;
 const port = PORT ?? 8081;
 
 const app = express();
 app.use(
     cors({
-        origin: FRONTEND_URL ?? "",
+        origin: [FRONTEND_URL ?? "", REVERSE_PROXY_URL ?? ""],
     })
 );
 
-app.use('/green', express.static(path.join(__dirname, '..', 'dist')));
+app.use("/green", express.static(path.join(__dirname, "..", "dist")));
 
 app.get("/api/health", (_, res) => {
     return res.status(200).json({
