@@ -12,7 +12,12 @@ app.use(
     })
 );
 
-app.use("/green", express.static(path.join(__dirname, "..", "dist")));
+app.use((req, _, next) => {
+    req.url = req.url.replace(/^\/green/, "");
+    next();
+});
+
+app.use("/", express.static(path.join(__dirname, "..", "dist")));
 
 app.get("/api/health", (_, res) => {
     return res.status(200).json({
