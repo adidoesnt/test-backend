@@ -32,9 +32,34 @@ jobs:
               with:
                   node-version: "18"
 
+            - name: Cache Heroku CLI
+              id: cache-heroku-cli
+              uses: actions/cache@v2
+              with:
+                path: ~/.cache/heroku
+                key: ${{ runner.os }}-heroku-cli-${{ hashFiles('**/.profile.d/heroku.sh') }}
+                restore-keys: |
+                  ${{ runner.os }}-heroku-cli-
+
             - name: Install Heroku CLI
+              if: steps.cache-heroku-cli.outputs.cache-hit != 'true'
               run: |
                   curl https://cli-assets.heroku.com/install-ubuntu.sh | sh
+
+            - name: Check if Heroku App Exists
+              id: heroku-app-check
+              run: |
+                if heroku apps:info $HEROKU_APP_NAME; then
+                    echo "::set-output name=app_exists::true"
+                else
+                    echo "::set-output name=app_exists::false"
+                fi
+              
+            - name: Create Heroku App
+              if: steps.heroku-app-check.outputs.app_exists != 'true'
+              run: |
+                heroku create $HEROKU_APP_NAME
+                    heroku git:remote -a $HEROKU_APP_NAME
 
             - name: Set Heroku Config
               run: |
