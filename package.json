@@ -16,6 +16,7 @@
     "dev": "source .envrc && nodemon src/index.js",
     "start": "node src/index.js",
     "build": "cd frontend && yarn && yarn build && cp -R dist ../",
+    "configure": "chmod +x ./scripts/config.sh && ./scripts/config.sh",
     "migrate": "chmod +x ./scripts/migrate.sh && ./scripts/migrate.sh",
     "seed": "chmod +x ./scripts/seed.sh && ./scripts/seed.sh",
     "serve": "serve dist"

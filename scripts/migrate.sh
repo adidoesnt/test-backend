@@ -10,8 +10,8 @@ ACTION=$2
 echo "ENVIRONMENT set to \"$ENVIRONMENT\""
 echo "ACTION set to \"$ACTION\""
 
-if [ "$ENVIRONMENT" != "development" ] && [ "$ENVIRONMENT" != "production" ]; then
-    echo "Invalid environment. Use 'development' or 'production'."
+if [ "$ENVIRONMENT" != "dev" ] && [ "$ENVIRONMENT" != "prod" ]; then
+    echo "Invalid environment. Use 'dev' or 'prod'."
     exit 1
 fi
 

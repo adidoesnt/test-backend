@@ -12,7 +12,7 @@ const {
 } = process.env;
 
 const config = {
-    development: {
+    dev: {
         database,
         username,
         host,
