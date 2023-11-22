@@ -2,13 +2,13 @@ const express = require("express");
 const cors = require("cors");
 const path = require("path");
 
-const { PORT, FRONTEND_URL, REVERSE_PROXY_URL } = process.env;
+const { PORT, FRONTEND_URL } = process.env;
 const port = PORT ?? 8081;
 
 const app = express();
 app.use(
     cors({
-        origin: [FRONTEND_URL ?? "", REVERSE_PROXY_URL ?? ""],
+        origin: [FRONTEND_URL ?? ""],
     })
 );
 
