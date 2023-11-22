@@ -1,0 +1,16 @@
+# Server
+export PORT=8081
+
+# Database - Dev
+export DB_USER=postgres
+export DB_HOST=localhost
+export DB_PORT=5432
+export DB_PASSWORD=
+export DB_DATABASE=sample_db
+
+# Database - Prod
+export PROD_DB_USER=postgres
+export PROD_DB_HOST=localhost
+export PROD_DB_PORT=5432
+export PROD_DB_PASSWORD=
+export PROD_DB_DATABASE=sample_db

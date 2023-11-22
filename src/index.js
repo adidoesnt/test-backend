@@ -2,15 +2,10 @@ const express = require("express");
 const cors = require("cors");
 const path = require("path");
 
-const { PORT, FRONTEND_URL } = process.env;
+const { PORT } = process.env;
 const port = PORT ?? 8081;
 
 const app = express();
-app.use(
-    cors({
-        origin: [FRONTEND_URL ?? ""],
-    })
-);
 
 app.use((req, _, next) => {
     req.url = req.url.replace(/^\/green/, "");

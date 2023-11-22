@@ -16,12 +16,13 @@
     "dev": "source .envrc && nodemon src/index.js",
     "start": "node src/index.js",
     "build": "cd frontend && yarn && yarn build && cp -R dist ../",
-    "migrate": "source .envrc && sequelize-cli db:migrate --config=./src/config.js --env=development --migrations-path=./src/migrations",
-    "reset": "source .envrc && sequelize-cli db:migrate:undo --config=./src/config.js --env=development --migrations-path=./src/migrations",
+    "migrate": "chmod +x ./scripts/migrate.sh && ./scripts/migrate.sh",
+    "seed": "chmod +x ./scripts/seed.sh && ./scripts/seed.sh",
     "serve": "serve dist"
   },
   "devDependencies": {
-    "nodemon": "^3.0.1"
+    "nodemon": "^3.0.1",
+    "sequelize-cli": "^6.6.2"
   },
   "engines": {
     "node": ">=18.0.0"
