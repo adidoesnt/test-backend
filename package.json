@@ -5,18 +5,25 @@
   "license": "MIT",
   "dependencies": {
     "cors": "^2.8.5",
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "json-stringify-safe": "^5.0.1",
+    "pg": "^8.11.3",
+    "seq-uuid": "^0.1.4",
+    "sequelize": "^6.35.1",
+    "sequelize-typescript": "^2.1.5"
   },
   "scripts": {
     "dev": "source .envrc && nodemon src/index.js",
     "start": "node src/index.js",
     "build": "cd frontend && yarn && yarn build && cp -R dist ../",
+    "migrate": "source .envrc && sequelize-cli db:migrate --config=./src/config.js --env=development --migrations-path=./src/migrations",
+    "reset": "source .envrc && sequelize-cli db:migrate:undo --config=./src/config.js --env=development --migrations-path=./src/migrations",
     "serve": "serve dist"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"
   },
-  "engines" : { 
-    "node" : ">=18.0.0"
+  "engines": {
+    "node": ">=18.0.0"
   }
 }
